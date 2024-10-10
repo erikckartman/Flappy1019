@@ -9,6 +9,7 @@ public class Spawn : MonoBehaviour
     private Vector2 spawnPosition;
     private float pumpPos = -5f;
     private float pumpPos2;
+    private Quaternion pumpQ;
 
     [SerializeField] private GameObject rocket;
     private Vector3 spawnRocket;
@@ -17,11 +18,10 @@ public class Spawn : MonoBehaviour
 
     [SerializeField] private Transform player;
 
-
     private void Start()
     {
-        InvokeRepeating("Spawning", 0f, 1.5f);
-        InvokeRepeating("Rockets", 0f, 4f);
+        InvokeRepeating("Spawning", 0f, 4f);
+        InvokeRepeating("Rockets", 0f, 6f);
     }
 
     private void Spawning()
@@ -29,11 +29,12 @@ public class Spawn : MonoBehaviour
         pumpPos = Random.Range(-7f, -1f);
         pumpPos2 = pumpPos + pump.transform.localScale.y + 2;
         
+        pumpQ = Quaternion.Euler(0f, 0f, Random.Range(-20f, 20f));
         spawnPosition = new Vector2(10f, pumpPos);
-        Instantiate(pump, spawnPosition, Quaternion.identity);
+        Instantiate(pump, spawnPosition, pumpQ);
 
         spawnPosition = new Vector2(10f, pumpPos2);
-        Instantiate(pump, spawnPosition, Quaternion.identity);
+        Instantiate(pump, spawnPosition, pumpQ);
     }
 
     private void Rockets()
@@ -41,12 +42,14 @@ public class Spawn : MonoBehaviour
         rocketX = Random.Range(-9f, 9f);
         rocketY = Random.Range(-5f, 5f);
 
-        spawnRocket = new Vector3(rocketX, rocketY, 40f);
+        spawnRocket = new Vector3(rocketX, rocketY, player.position.z + 50f);
         GameObject rocketClone = Instantiate(rocket, spawnRocket, Quaternion.identity);
 
-        Vector3 direction = new Vector3(player.position.x, player.position.y, 0f);
-        transform.rotation = Quaternion.LookRotation(direction);
+        Vector3 direction = (player.position - rocketClone.transform.position).normalized;
 
         rocketClone.GetComponent<Rigidbody>().velocity = direction * 5f;
+
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        rocketClone.transform.rotation = rotation * Quaternion.Euler(90f, 0f, 0f);
     }
 }

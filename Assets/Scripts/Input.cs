@@ -8,17 +8,17 @@ public class Inout : MonoBehaviour
 
     void Update()
     {
-        //if (Input.touchCount > 0)
-        //{
-        //    Touch touch = Input.GetTouch(0);
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        //    if (touch.phase == TouchPhase.Began)
-        //    {
-        //        Debug.Log("That shit works!");
+            if (touch.phase == TouchPhase.Began)
+            {
+                Debug.Log("That shit works!");
 
-        //        rb.velocity = new Vector2(0f, 6f);
-        //    }
-        //}
+                rb.velocity = new Vector2(0f, 6f);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {

@@ -7,7 +7,7 @@ public class PumpScript : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     void Update()
     {
-        rb.velocity = new Vector2(-5f, 0f);
+        rb.velocity = new Vector2(-2f, 0f);
 
         if(transform.position.x < -10f)
         {
