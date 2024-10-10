@@ -1,28 +1,18 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inout : MonoBehaviour
 {
-    [SerializeField]private Rigidbody2D rb;
+    [SerializeField] private Controls joystick;
+    private float speed = 15f;
 
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
+        float horizontal = joystick.Horizontal();
+        float vertical = joystick.Vertical();
 
-            if (touch.phase == TouchPhase.Began)
-            {
-                Debug.Log("That shit works!");
-
-                rb.velocity = new Vector2(0f, 6f);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            rb.velocity = new Vector2(0f, 6f);
-        }
+        Vector3 direction = new Vector3(horizontal, vertical, 0f);
+        transform.position += direction * speed * Time.deltaTime;
     }
 }
