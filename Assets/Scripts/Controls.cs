@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Controls : MonoBehaviour, IDragHandler
+public class Controls : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     private Vector2 joystickCenter; 
     private Vector2 inputVector;
