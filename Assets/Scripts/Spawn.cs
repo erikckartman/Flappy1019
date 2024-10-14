@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    [SerializeField] private GameObject pump;
-    private Vector2 spawnPosition;
-    private float pumpPos = -5f;
-    private float pumpPos2;
-    private Quaternion pumpQ;
+    [SerializeField] private GameObject meteor;
+    private Vector3 spawnMeteor;
+    private float meteorX;
+    private float meteorY;
 
     [SerializeField] private GameObject rocket;
     private Vector3 spawnRocket;
@@ -21,20 +20,24 @@ public class Spawn : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("Spawning", 0f, 4f);
-        InvokeRepeating("Rockets", 0f, 6f);
+        InvokeRepeating("Rockets", 0f, 3f);
     }
 
     private void Spawning()
     {
-        pumpPos = Random.Range(-7f, -1f);
-        pumpPos2 = pumpPos + pump.transform.localScale.y + 2;
-        
-        pumpQ = Quaternion.Euler(0f, 0f, Random.Range(-20f, 20f));
-        spawnPosition = new Vector2(10f, pumpPos);
-        Instantiate(pump, spawnPosition, pumpQ);
+        meteorY = Random.Range(-7f, 7f);
+        if(meteorY < 5f && meteorY > -5f)
+        {
+            meteorX = Random.Range(10f, 13f);
+        }
+        else
+        {
+            meteorX = Random.Range(2f, 13f);
+        }
 
-        spawnPosition = new Vector2(10f, pumpPos2);
-        Instantiate(pump, spawnPosition, pumpQ);
+        spawnMeteor = new Vector3(meteorX, meteorY, 0f);
+
+        GameObject meteorClone = Instantiate(meteor, spawnMeteor, Quaternion.identity);
     }
 
     private void Rockets()
@@ -47,7 +50,7 @@ public class Spawn : MonoBehaviour
 
         Vector3 direction = (player.position - rocketClone.transform.position).normalized;
 
-        rocketClone.GetComponent<Rigidbody>().velocity = direction * 5f;
+        rocketClone.GetComponent<Rigidbody>().velocity = direction * 15f;
 
         Quaternion rotation = Quaternion.LookRotation(direction);
         rocketClone.transform.rotation = rotation * Quaternion.Euler(90f, 0f, 0f);

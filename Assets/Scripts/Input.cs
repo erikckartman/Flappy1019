@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inout : MonoBehaviour
+public class Input : MonoBehaviour
 {
     [SerializeField] private Controls joystick;
-    private float speed = 15f;
+    private float speed = 2f;
 
     void Update()
     {
