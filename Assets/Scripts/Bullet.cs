@@ -9,10 +9,17 @@ public class Patron : MonoBehaviour
 
     private void OnCollisionEnter(Collision collider)
     {
-        if (collider.gameObject.CompareTag("Enemy"))
+        if (collider.gameObject.CompareTag("Metheor"))
         {
             Destroy(collider.gameObject);
             Destroy(gameObject);
+            GameScore.score += 15;
+        }
+        if (collider.gameObject.CompareTag("Rocket"))
+        {
+            Destroy(collider.gameObject);
+            Destroy(gameObject);
+            GameScore.score += 50;
         }
     }
     private void Awake()

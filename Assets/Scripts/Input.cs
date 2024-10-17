@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameInput : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class GameInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collider)
     {
-        if (collider.gameObject.CompareTag("Enemy"))
+        if (collider.gameObject.CompareTag("Metheor") || collider.gameObject.CompareTag("Rocket"))
         {
             Destroy(gameObject);
         }
