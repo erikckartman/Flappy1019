@@ -1,19 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Controls : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    private Vector2 joystickCenter; 
+    [SerializeField] private Image joystickBackground;
+    [SerializeField] private Image joystickHandle;
     private Vector2 inputVector;
 
-    [SerializeField] private RectTransform stickTransform; 
-    [SerializeField] private float joystickRadius = 50f;
 
-    private void Start()
+    public void OnDrag(PointerEventData eventData)
     {
-        joystickCenter = stickTransform.anchoredPosition; 
+        Vector2 position;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            joystickBackground.rectTransform,
+            eventData.position,
+            eventData.pressEventCamera,
+            out position))
+        {
+            // Нормалізуємо координати
+            position.x = (position.x / joystickBackground.rectTransform.sizeDelta.x);
+            position.y = (position.y / joystickBackground.rectTransform.sizeDelta.y);
+
+            inputVector = new Vector2(position.x * 2, position.y * 2);
+            inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
+
+            // Переміщуємо рукоятку джойстика
+            joystickHandle.rectTransform.anchoredPosition = new Vector2(
+                inputVector.x * (joystickBackground.rectTransform.sizeDelta.x / 2),
+                inputVector.y * (joystickBackground.rectTransform.sizeDelta.y / 2));
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -21,23 +39,10 @@ public class Controls : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
         OnDrag(eventData);
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        Vector2 direction = eventData.position - joystickCenter; 
-        inputVector = direction.normalized;
-
-        if (direction.magnitude > joystickRadius)
-        {
-            direction = direction.normalized * joystickRadius; 
-        }
-
-        stickTransform.anchoredPosition = joystickCenter + direction; 
-    }
-
     public void OnPointerUp(PointerEventData eventData)
     {
-        stickTransform.anchoredPosition = Vector2.zero;
         inputVector = Vector2.zero;
+        joystickHandle.rectTransform.anchoredPosition = Vector2.zero;
     }
 
     public float Horizontal()
