@@ -529,7 +529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -825, y: -200}
+  m_AnchoredPosition: {x: -748, y: -160.98}
   m_SizeDelta: {x: 305, y: 542.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &648084111
@@ -544,8 +544,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f066c97985dadb348a031de3d00d8db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stickTransform: {fileID: 1504900007}
-  joystickRadius: 50
+  joystickBackground: {fileID: 1231655604}
+  joystickHandle: {fileID: 1504900008}
 --- !u!1 &755760341
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.23}
   m_AnchorMax: {x: 0.5, y: 0.29000002}
-  m_AnchoredPosition: {x: -21, y: 9}
+  m_AnchoredPosition: {x: 0, y: -30.275}
   m_SizeDelta: {x: 321.8087, y: 295.8504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1231655604
@@ -829,7 +829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.20419402}
   m_AnchorMax: {x: 0.5, y: 0.20419402}
-  m_AnchoredPosition: {x: -21, y: 44.321198}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 176.7506, y: 183.3386}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1504900008
@@ -930,7 +930,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

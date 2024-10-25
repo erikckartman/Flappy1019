@@ -27,6 +27,7 @@ public class Meteor : MonoBehaviour
 
     private void Update()
     {
-        rb.velocity = new Vector3(-1f, direction, 0f);
+        float speed = Random.Range(1f, 3f);
+        rb.velocity = new Vector3(-3f * speed, direction, 0f);
     }
 }

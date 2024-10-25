@@ -19,8 +19,8 @@ public class Spawn : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("Spawning", 0f, 4f);
-        InvokeRepeating("Rockets", 0f, 3f);
+        InvokeRepeating("Spawning", 0f, 3f);
+        InvokeRepeating("Rockets", 0f, 2f);
     }
 
     private void Spawning()
