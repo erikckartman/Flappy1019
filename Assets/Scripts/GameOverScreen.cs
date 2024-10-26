@@ -33,4 +33,9 @@ public class GameOverScreen : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void GoToLB()
+    {
+        SceneManager.LoadScene("Leaderboard");
+    }
 }
